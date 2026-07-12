@@ -1,9 +1,7 @@
-import os
 import ctypes
 from win32 import win32gui
 import win32process
 import win32api
-import win32con
 from window_helper import WindowMgr
 import time
 
