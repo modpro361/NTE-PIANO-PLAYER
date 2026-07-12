@@ -99,14 +99,13 @@ def force_foreground(hwnd):
 
 def get_game_window():
     global game_hwnd
-    # This searches for any window that contains your target text
+    # This searches for any window that contains "NTE" in its title, but we want to be more specific to avoid false positives.
     def enum_windows_callback(hwnd, extra):
         global game_hwnd
         window_title = win32gui.GetWindowText(hwnd)
         class_name = win32gui.GetClassName(hwnd)
-        # Match the real game window specifically: exact title "NTE" (trimmed)
-        # and the UnrealWindow class, to avoid matching VS Code or other
-        # windows that merely contain "NTE" as a substring (e.g. project names)
+        # Match the real game window specifically: exact title "NTE"
+        # and the UnrealWindow class, to avoid matching VS Code or other windows that contains "NTE" as a substring
         if window_title.strip() == "NTE" and class_name == "UnrealWindow":
             game_hwnd = hwnd
             return False  # Stops searching once found
@@ -135,12 +134,12 @@ char_map = {
     'y': 0x2C, 'x': 0x2D, 'c': 0x2E, 'v': 0x2F, 'b': 0x30, 'n': 0x31, 'm': 0x32}
 
 # Debug, list every window with "NTE" in the title so we can confirm the correct one is being found
-def list_nte_windows(hwnd, extra):
-    title = win32gui.GetWindowText(hwnd)
-    if "NTE" in title:
-        visible = win32gui.IsWindowVisible(hwnd)
-        class_name = win32gui.GetClassName(hwnd)
-        print(f"hwnd={hwnd}, title='{title}', visible={visible}, class='{class_name}'")
+#def list_nte_windows(hwnd, extra):
+#    #title = win32gui.GetWindowText(hwnd)
+#    if "NTE" in title:
+#        visible = win32gui.IsWindowVisible(hwnd)
+#        class_name = win32gui.GetClassName(hwnd)
+#        print(f"hwnd={hwnd}, title='{title}', visible={visible}, class='{class_name}'")
 
 print("--- Windows matching 'NTE' ---")
 win32gui.EnumWindows(list_nte_windows, None)
