@@ -67,6 +67,14 @@ def release_key(key):
    x = Input(ctypes.c_ulong(1), ii_)
    ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
+def press_combo(modifier_scancode, key_scancode, hold_time=0.05):
+    press_key(modifier_scancode)   # 1. modifier down
+    time.sleep(0.02)               # tiny delay so OS registers it first
+    press_key(key_scancode)        # 2. key down
+    time.sleep(hold_time)          # 3. hold briefly
+    release_key(key_scancode)      # 4. key up
+    time.sleep(0.02)
+    release_key(modifier_scancode) # 5. modifier up
 
 def force_foreground(hwnd):
     """Reliable foreground switch that bypasses Windows' foreground lock
@@ -129,9 +137,9 @@ def get_game_window():
 
 # Character map
 char_map = {
-    'q': 0x10, 'w': 0x11, 'e': 0x12, 'r': 0x13, 't': 0x14, 'z': 0x15, 'u': 0x16, 'i': 0x17, 'o': 0x18, 'p': 0x19,
+    'q': 0x10, 'w': 0x11, 'e': 0x12, 'r': 0x13, 't': 0x14, 'z': 0x2C, 'u': 0x16, 'i': 0x17, 'o': 0x18, 'p': 0x19,
     'a': 0x1E, 's': 0x1F, 'd': 0x20, 'f': 0x21, 'g': 0x22, 'h': 0x23, 'j': 0x24, 'k': 0x25, 'l': 0x26,
-    'y': 0x2C, 'x': 0x2D, 'c': 0x2E, 'v': 0x2F, 'b': 0x30, 'n': 0x31, 'm': 0x32}
+    'y': 0x15, 'x': 0x2D, 'c': 0x2E, 'v': 0x2F, 'b': 0x30, 'n': 0x31, 'm': 0x32, 'shift': 0x2A, 'ctrl': 0x1D }
 
 # Debug, list every window with "NTE" in the title so we can confirm the correct one is being found
 #def list_nte_windows(hwnd, extra):
@@ -140,14 +148,78 @@ char_map = {
 #        visible = win32gui.IsWindowVisible(hwnd)
 #        class_name = win32gui.GetClassName(hwnd)
 #        print(f"hwnd={hwnd}, title='{title}', visible={visible}, class='{class_name}'")
-
-print("--- Windows matching 'NTE' ---")
-win32gui.EnumWindows(list_nte_windows, None)
-print("--- End list ---")
+#print("--- Windows matching 'NTE' ---")
+#win32gui.EnumWindows(list_nte_windows, None)
+#print("--- End list ---")
 
 # Sending the message using the character map
+time.sleep(1)
 get_game_window()
 
-press_key(char_map['q'])
+#adding functions to play the sharp piano keys
+#treble sharps
+def tresharp_1():
+    press_combo(char_map['shift'], char_map['q'])
+
+def tresharp_4():
+    press_combo(char_map['shift'], char_map['r'])
+
+def tresharp_5():
+    press_combo(char_map['shift'], char_map['t'])
+
+#mid sharps
+def midsharp_1():
+    press_combo(char_map['shift'], char_map['a'])
+
+def midsharp_4():
+    press_combo(char_map['shift'], char_map['f'])
+
+def midsharp_5():
+    press_combo(char_map['shift'], char_map['g'])
+
+#bass sharps
+def basssharp_1():
+    press_combo(char_map['shift'], char_map['z'])
+
+def basssharp_4():
+    press_combo(char_map['shift'], char_map['v'])
+
+def basssharp_5():
+    press_combo(char_map['shift'], char_map['b'])
+
+
+#adding functions to play the flat piano keys
+#treble flats
+def trebleflat_3():
+    press_combo(char_map['ctrl'], char_map['e'])
+
+def trebleflat_7():
+    press_combo(char_map['ctrl'], char_map['u'])
+
+#mid flats
+def midflat_3():
+    press_combo(char_map['ctrl'], char_map['d'])
+
+def midflat_7():
+    press_combo(char_map['ctrl'], char_map['j'])
+
+#bass flats
+def bassflat_3():
+    press_combo(char_map['ctrl'], char_map['c'])
+
+def bassflat_7():
+    press_combo(char_map['ctrl'], char_map['m'])
+
+
+#adding functions to play the sharp piano keys
+tresharp_1()
 time.sleep(1)
-release_key(char_map['q'])
+midsharp_1()
+time.sleep(1)
+basssharp_1()
+time.sleep(1)
+trebleflat_3()
+time.sleep(1)
+midflat_3()
+time.sleep(1)
+bassflat_3()
