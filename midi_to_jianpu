@@ -1,0 +1,43 @@
+midi_to_jianpu:
+
+Octave 3 (low, dot below)
+48: "1_low",   # C3
+49: "#1_low",  # C#3
+50: "2_low",   # D3
+51: "b3_low",  # Eb3
+52: "3_low",   # E3
+53: "4_low",   # F3
+54: "#4_low",  # F#3
+55: "5_low",   # G3
+56: "#5_low",  # G#3
+57: "6_low",   # A3
+58: "b7_low",  # Bb3
+59: "7_low",   # B3
+
+Octave 4 (middle, no dot)
+60: "1",   # C4
+61: "#1",  # C#4
+62: "2",   # D4
+63: "b3",  # Eb4
+64: "3",   # E4
+65: "4",   # F4
+66: "#4",  # F#4
+67: "5",   # G4
+68: "#5",  # G#4
+69: "6",   # A4
+70: "b7",  # Bb4
+71: "7",   # B4
+
+Octave 5 (high, dot above)
+72: "1_high",  # C5
+73: "#1_high", # C#5
+74: "2_high",  # D5
+75: "b3_high", # Eb5
+76: "3_high",  # E5
+77: "4_high",  # F5
+78: "#4_high", # F#5
+79: "5_high",  # G5
+80: "#5_high", # G#5
+81: "6_high",  # A5
+82: "b7_high", # Bb5
+83: "7_high",  # B5
