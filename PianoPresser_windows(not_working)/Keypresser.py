@@ -1,3 +1,5 @@
+'''This is a a piano player for the piano in nte, this program can read sheet music and play it on nte.'''
+#Please this verson is made for windows
 import ctypes
 from win32 import win32gui
 import win32process
